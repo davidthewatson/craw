@@ -1,6 +1,7 @@
 from scrapy.selector import Selector
 from pages.models import WebPage
 
+
 class PagePipeline(object):
 
     def __init__(self):
