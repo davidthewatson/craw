@@ -1,4 +1,4 @@
-from scrapy.selector import Selector
+from bs4 import BeautifulSoup
 from pages.models import WebPage
 
 
@@ -19,6 +19,7 @@ class ParserPipeline(object):
 
     def process_item(self, item, spider):
         record = WebPage.objects.get(url=item['url'])
-        record.title = Selector(text=item['html']).xpath('//title/text()').extract()[0]
+        soup = BeautifulSoup(item['html'], 'lxml')
+        record.title = soup.title.text
         record.save()
         return item
