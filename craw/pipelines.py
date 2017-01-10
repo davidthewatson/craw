@@ -1,6 +1,5 @@
-import scrapy
-from scrapy.conf import settings
-
+from scrapy.selector import Selector
+from pages.models import WebPage
 
 class PagePipeline(object):
 
@@ -11,8 +10,14 @@ class PagePipeline(object):
         item.save()
         return item
 
-# class HtmlFilePipeline(object):
-#     def process_item(self, item, spider):
-#         file_name = item['url']
-#         with open('files/%s.html' % file_name, 'w+b') as f:
-#             f.write(item['html'])
+
+class ParserPipeline(object):
+
+    def __init__(self):
+        pass
+
+    def process_item(self, item, spider):
+        record = WebPage.objects.get(url=item['url'])
+        record.title = Selector(text=item['html']).xpath('//title/text()').extract()[0]
+        record.save()
+        return item
