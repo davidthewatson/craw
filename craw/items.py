@@ -1,7 +1,6 @@
-from scrapy.item import Item, Field
+from scrapy_djangoitem import DjangoItem
+from pages.models import WebPage
 
 
-class Listing(Item):
-    url = Field()
-    html = Field()
-    links = Field()
+class PageItem(DjangoItem):
+    django_model = WebPage

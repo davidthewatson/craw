@@ -1,6 +1,6 @@
 import scrapy
 from scrapy.linkextractors import LinkExtractor
-from craw.items import Listing
+from craw.items import PageItem
 
 
 class BlogSpider(scrapy.Spider):
@@ -8,7 +8,7 @@ class BlogSpider(scrapy.Spider):
     start_urls = ['http://davidwatson.org/']
 
     def parse(self, response):
-        item = Listing()
+        item = PageItem()
         extractor = LinkExtractor(allow_domains='davidwatson.org')
         links = extractor.extract_links(response)
         item['url'] = response.url

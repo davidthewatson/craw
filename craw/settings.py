@@ -9,6 +9,16 @@
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 
+import os
+import sys
+import django
+
+sys.path.append('../fish')
+
+os.environ['DJANGO_SETTINGS_MODULE'] = 'fish.settings'
+
+django.setup()
+
 BOT_NAME = 'craw'
 
 SPIDER_MODULES = ['craw.spiders']
@@ -68,7 +78,7 @@ ROBOTSTXT_OBEY = True
 #    'craw.pipelines.SomePipeline': 300,
 #}
 ITEM_PIPELINES = {
-'craw.pipelines.MongoPipeline': 300,
+'craw.pipelines.PagePipeline': 300,
 
 }
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -91,8 +101,3 @@ ITEM_PIPELINES = {
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
-
-MONGODB_SERVER = "localhost"
-MONGODB_PORT = 27017
-MONGODB_DB = "dave"
-MONGODB_COLLECTION = "scrapy_items"
