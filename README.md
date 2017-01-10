@@ -1,2 +1,2 @@
 # craw
-Recursive scraping pipeline with scrapy and mongo
+Recursive scraping pipeline with scrapy and postgresql
